@@ -7,6 +7,7 @@ import connectDb from './db/db.js';
 
 // routes import
 import userRoutes from './routes/user.routes.js';
+import taskRoutes from './routes/task.routes.js'
 
 // config dotenv
 dotenv.config();
@@ -27,7 +28,8 @@ const PORT = process.env.PORT || 8080;
 // });
 
 // middlewares
-app.use('/api/v1/user', userRoutes)
+app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/task', taskRoutes)
 
 app.listen(PORT,()=>{
     console.log(`Server is connected on http://localhost:${PORT}`.bgCyan.white);

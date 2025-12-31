@@ -32,4 +32,20 @@ export const registerUsers = async (req,res,next) => {
         message : 'new user created',
         user,
     })
+};
+
+export const signInUser = async (req, res, next) => {
+    const { name, email, password } = req.body;
+
+    // validation
+    if(!name || !email || !password) res.status(400).json({message: 'All Field required'});
+    // user check
+    const user = await User.findOne({email});
+    // validat user
+    if(!user) res.status(400).json({message: 'user not found'});
+
+    res.status(200).json({
+        message: 'Logged In successfull',
+        user
+    })
 }

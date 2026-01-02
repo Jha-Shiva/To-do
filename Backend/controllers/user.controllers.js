@@ -1,7 +1,7 @@
 import express from 'express';
 import User from '../models/user.model.js';
 import bcrypt from 'bcrypt'
-import jsonwebtoken from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 
 export const registerUsers = async (req,res,next) => {
     // take input 
@@ -43,8 +43,19 @@ export const signInUser = async (req, res, next) => {
     const user = await User.findOne({email});
     // validat user
     if(!user) res.status(400).json({message: 'user not found'});
+    if(!password) res.status(400).json({message: 'please give password'});
 
-    res.status(200).json({
+    const valiPassword = await bcrypt.compare(password, user.password);
+    if(!valiPassword) res.status(400).json({message: 'password or email is incorrect'});
+
+
+    //token generate
+    const token = jwt.sign(
+        { id: user._id},
+        process.env.SECRET
+        );
+
+    res.status(200).cookie('access_token',token, {httpOnly : true}).json({
         message: 'Logged In successfull',
         user
     })

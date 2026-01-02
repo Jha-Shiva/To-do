@@ -8,6 +8,7 @@ import connectDb from './db/db.js';
 // routes import
 import userRoutes from './routes/user.routes.js';
 import taskRoutes from './routes/task.routes.js'
+import cookieParser from 'cookie-parser';
 
 // config dotenv
 dotenv.config();
@@ -20,6 +21,7 @@ const app = express();
 
 // middlewares
 app.use(express.json());
+app.use(cookieParser())
 
 const PORT = process.env.PORT || 8080;
 

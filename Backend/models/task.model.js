@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import User from "./user.model";
+import User from "./user.model.js";
 
 const taskSchema = new mongoose.Schema({
     userId : {
@@ -16,7 +16,7 @@ const taskSchema = new mongoose.Schema({
         {
             text : {
                 type : String,
-                required : true
+                // required : true
             },
             isCompleted : {
                 type : Boolean,

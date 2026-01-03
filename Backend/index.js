@@ -21,13 +21,10 @@ const app = express();
 
 // middlewares
 app.use(express.json());
-app.use(cookieParser())
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 const PORT = process.env.PORT || 8080;
-
-// app.get('/', (req, res)=>{
-//     res.send('<h1>Hello Client</h1>')
-// });
 
 // middlewares
 app.use('/api/v1/user', userRoutes);

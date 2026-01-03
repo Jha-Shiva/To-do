@@ -45,8 +45,8 @@ export const signInUser = async (req, res, next) => {
     if(!user) res.status(400).json({message: 'user not found'});
     if(!password) res.status(400).json({message: 'please give password'});
 
-    const valiPassword = await bcrypt.compare(password, user.password);
-    if(!valiPassword) res.status(400).json({message: 'password or email is incorrect'});
+    const validPassword = await bcrypt.compare(password, user.password);
+    if(!validPassword) res.status(400).json({message: 'password or email is incorrect'});
 
 
     //token generate

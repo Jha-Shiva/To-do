@@ -1,1 +1,8 @@
 @import "tailwindcss";
+@import "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+
+.Roboto{
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+}

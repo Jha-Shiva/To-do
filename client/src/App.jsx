@@ -7,8 +7,10 @@ function App() {
 
   return (
     <>
-      <Header/>
-      <SignUp/>
+      <div className="bg-white text-black dark:bg-gray-900 dark:text-white">
+        <Header/>
+        <SignUp/>
+      </div>
     </>
   )
 }

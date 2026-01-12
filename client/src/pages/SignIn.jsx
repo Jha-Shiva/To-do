@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
-import { TextInput } from 'flowbite-react'
-const SignUp = () => {
-    const [formData, setFormData] = useState({});
-    const handleChange = (e)=>{
-        setFormData({...formData, [e.target.id]: e.target.value.trim() });
-    }
-    const handleSubmit = async(e)=>{
-        e.preventDefault();
-        const res = await fetch('/api/v1/user/register',{
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(formData)
-        })
+import { Link } from 'react-router-dom';
 
-        const data = await res.json();
-    }
+const SignIn = () => {
+    const [formData, setFormData] = useState({});
+        const handleChange = (e)=>{
+            setFormData({...formData, [e.target.id]: e.target.value.trim() });
+        }
+        const handleSubmit = async(e)=>{
+            e.preventDefault();
+            const res = await fetch('/api/v1/user/signin',{
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            })
+    
+            const data = await res.json();
+        }
   return (
     <div className='min-h-screen mt-20'>
         <div className="flex mx-7 sm:mx-20 ">
@@ -24,7 +25,7 @@ const SignUp = () => {
                 alt="branch"
                 className='hidden sm:block sm:w-75 bg-cover mask-t-from-50% mask-b-to-70% rotate-12'
                 />
-                <p className='sm:absolute sm:top-25 sm:left-30'>Sign Up</p>
+                <p className='sm:absolute sm:top-25 sm:left-30'>Sign In</p>
             </div>
             {/* form */}
             <div className="shadow-xl ring-2 ring-rose-500/50 flex-1 p-6 rounded-lg bg-white dark:bg-gray-800 dark:ring-blue-500">
@@ -44,13 +45,13 @@ const SignUp = () => {
                         <input type="password" id='password' name='password' className='border-2 m-3 rounded-sm w-full sm:p-1' onChange={handleChange} />
                     </div>
 
-                    <button className='bg-blue-700 text-white p-2 rounded-lg ml-2 hover:bg-blue-600 cursor-pointer w-25 focus:outline-2 duration-300 ease-in focus:outline-offset-2 focus:outline-blue-500'>Sign Up</button>
+                    <button className='bg-blue-700 text-white p-2 rounded-lg ml-2 hover:bg-blue-600 cursor-pointer w-25 focus:outline-2 duration-300 ease-in focus:outline-offset-2 focus:outline-blue-500'>Sign In</button>
                 </form>
-                <p className='mt-5 text-sm'>Already have an account ? <span className='text-blue-500 cursor-pointer'>Sign In</span></p>
+                <p className='mt-5 text-sm'>Don't have an account ? <Link to={'/sign-up'} className='text-blue-500 cursor-pointer'>Sign Up</Link></p>
             </div>
         </div>
     </div>
   )
 }
 
-export default SignUp
+export default SignIn

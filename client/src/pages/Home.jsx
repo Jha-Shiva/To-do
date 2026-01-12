@@ -1,8 +1,13 @@
 import React from 'react'
+import BackgroundWrapper from '../component/BackgroundWrapper'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <BackgroundWrapper image={'/leaves.png'}>
+        <div className=''>
+            Home
+        </div>
+    </BackgroundWrapper>
   )
 }
 

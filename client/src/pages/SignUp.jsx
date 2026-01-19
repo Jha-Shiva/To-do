@@ -1,21 +1,29 @@
 import React, { useState } from 'react'
 import { TextInput } from 'flowbite-react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import BackgroundWrapper from '../component/BackgroundWrapper';
 const SignUp = () => {
     const [formData, setFormData] = useState({});
+    const navigate = useNavigate()
     const handleChange = (e)=>{
         setFormData({...formData, [e.target.id]: e.target.value.trim() });
     }
     const handleSubmit = async(e)=>{
         e.preventDefault();
-        const res = await fetch('/api/v1/user/register',{
+        try {
+            const res = await fetch('/api/v1/user/register',{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(formData)
         })
 
         const data = await res.json();
+        if(data.success){
+            navigate('/')
+        }
+        } catch (error) {
+            console.log(error);       
+        }
     }
   return (
     <BackgroundWrapper image={'/leaves.png'}>
@@ -34,17 +42,17 @@ const SignUp = () => {
                     <form action="" className='' onSubmit={handleSubmit}>
                         <div className="">
                             <label htmlFor="name">Name</label>
-                            <input type="text" id='name' name='name' className='border-2 m-3 rounded-sm w-full sm:p-1' color='Light' onChange={handleChange} />
+                            <input type="text" id='name' name='name' className='border-2 m-3 rounded-sm w-full p-1' color='Light' onChange={handleChange} />
                         </div>
 
                         <div className="">
                             <label htmlFor="email">Email</label>
-                            <input type="email" id='email' name='email' className='border-2 m-3 rounded-sm w-full sm:p-1' onChange={handleChange} />
+                            <input type="email" id='email' name='email' className='border-2 m-3 rounded-sm w-full p-1' onChange={handleChange} />
                         </div>
 
                         <div className="">
                             <label htmlFor="password">Password</label>
-                            <input type="password" id='password' name='password' className='border-2 m-3 rounded-sm w-full sm:p-1' onChange={handleChange} />
+                            <input type="password" id='password' name='password' className='border-2 m-3 rounded-sm w-full p-1' onChange={handleChange} />
                         </div>
 
                         <button className='bg-blue-700 text-white p-2 rounded-lg ml-2 hover:bg-blue-600 cursor-pointer w-25 focus:outline-2 duration-300 ease-in focus:outline-offset-2 focus:outline-blue-500'>Sign Up</button>

@@ -7,23 +7,32 @@ const taskSchema = new mongoose.Schema({
         ref : "User",
         required : true
     },
-    title : {
-        type : String,
+    // title : {
+    //     type : String,
+    //     required: true,
+    //     trim : true
+    // },
+    // task : [
+    //     {
+    //         text : {
+    //             type : String,
+    //             // required : true
+    //         },
+    //         isCompleted : {
+    //             type : Boolean,
+    //             default : false
+    //         }
+    //     }
+    // ]
+    task: {
+        type: String,
         required: true,
-        trim : true
+        trim: true
     },
-    task : [
-        {
-            text : {
-                type : String,
-                // required : true
-            },
-            isCompleted : {
-                type : Boolean,
-                default : false
-            }
-        }
-    ]
+    isCompleted : {
+        type : Boolean,
+        default : false
+    }
 }, { timestamps: true });
 
 const Task = mongoose.model('Task', taskSchema);

@@ -29,6 +29,7 @@ export const registerUsers = async (req,res,next) => {
     await user.save();
      
     res.status(201).json({
+        success: true,
         message : 'new user created',
         user,
     })
@@ -56,6 +57,7 @@ export const signInUser = async (req, res, next) => {
         );
 
     res.status(200).cookie('access_token',token, {httpOnly : true}).json({
+        success: true,
         message: 'Logged In successfull',
         user
     })

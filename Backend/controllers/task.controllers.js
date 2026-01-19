@@ -93,3 +93,32 @@ export const getTask = async (req, res, next)=>{
         allTask
     })
 };
+
+export const deleteTask = async (req, res, next) =>{
+    const { taskId } = req.params
+    console.log(req.params);
+    if(!req.user?.id){
+        return res.status(401).json({ message: 'Not authorized' });
+    };
+
+    try {
+        const task = await Task.findOne({
+            _id: taskId,
+            userId: req.user.id
+        });
+
+        if(!task){
+            return res.status(404).json({ message: 'task not found'})
+        };
+
+        await task.deleteOne();
+        
+        res.status(200).json({ 
+            message: 'task deleted successfully',
+            taskId
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'server error' });
+    }
+};
